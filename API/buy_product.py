@@ -3,17 +3,13 @@ import urllib.request
 import json
 
 def Buy_product():
-    url = 'http://localhost:5000/api/post/clients'
-    values = [
-    {
-        'nombre': "leche",
+    url = 'http://localhost:5000/api/post/buy_products'
+    values = {
+        'cedula': "1127537146",
+        'id': "9",
+        'nombre': "huevo",
         'cantidad': "3"
-    },
-    {
-        'nombre': "Azucar",
-        'cantidad': "1"
-    }, 
-]
+    }
 
     params = json.dumps(values).encode('utf-8')
     req = urllib.request.Request(url, data=params,
@@ -24,14 +20,16 @@ def Buy_product():
     # print (result)
     listJson = json.loads(result)
     # print (listJson)
-    print("\nCOMPRAR\n")
+    print("\nCOMPRAR PRODUCTOS\n")
     # print("\n")
     for i in listJson:
         # print (listJson[i])
         # print ("\n")
         for x in listJson[i]:
-            for j in x:
-                print(j,":",x[j])
-            print ("\n")
+            print(x,":",listJson[i][x])
+        if len(i) == 0:
+            print("Producto no existeee")
+        else:
+            print("\nCompra realizada!")
 
-    print("\nCompra realizada")
+            
